@@ -1,0 +1,17 @@
+{
+  "name": "uf-scheduler-api",
+  "version": "2.0.0",
+  "description": "API for UF Scheduler web app",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "pytest tests/"
+  },
+  "author": "Adithya Haridas",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-python-requirements": "^5.1.1"
+  }
+}

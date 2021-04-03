@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14.x
+  pre_build:
+    commands:
+      - npm ci
+  build:
+    commands:
+      - echo Build started on `date`
+      - sls deploy
+      - echo Done on `date`

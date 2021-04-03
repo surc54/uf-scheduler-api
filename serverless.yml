@@ -56,7 +56,9 @@ provider:
 
 functions:
   hello:
-    handler: lambdas.search-api.handler.handler
+    handler: lambdas/search-api/handler.hello
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - httpApi:
           path: /hello
@@ -118,5 +120,6 @@ plugins:
 
 custom:
   pythonRequirements:
+    layer: true
     noDeploy:
       - pytest

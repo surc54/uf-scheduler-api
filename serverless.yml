@@ -121,7 +121,7 @@ plugins:
 custom:
   scripts:
     hooks:
-      'deploy:createDeploymentArtifacts': npm run build
+      'package:initialize': npm run build
   serverless-layers:
     layersDeploymentBucket: uf-scheduler-api-dev-serverlessdeploymentbucket-o2iji1gigl12
     common:

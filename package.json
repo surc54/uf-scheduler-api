@@ -1,17 +1,23 @@
 {
   "name": "uf-scheduler-api",
   "version": "2.0.0",
-  "description": "API for UF Scheduler web app",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "API for UF Scheduler",
+  "main": "dist/handler.js",
+  "private": true,
   "scripts": {
-    "test": "pytest tests/"
+    "build": "babel src -d dist"
   },
   "author": "Adithya Haridas",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "devDependencies": {
-    "serverless-python-requirements": "^5.1.1"
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "eslint": "^7.24.0",
+    "serverless-layers": "^2.3.3",
+    "serverless-plugin-scripts": "^1.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
   }
 }

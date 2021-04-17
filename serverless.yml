@@ -12,6 +12,9 @@
 # Happy Coding!
 
 service: uf-scheduler-api
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -19,7 +22,7 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: nodejs12.x
   lambdaHashingVersion: 20201221
 
 # you can overwrite defaults here
@@ -47,21 +50,17 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
-#  patterns:
-#    - '!exclude-me.py'
-#    - '!exclude-me-dir/**'
-#    - include-me.py
-#    - include-me-dir/**
+package:
+ patterns:
+   - '!src/**'
+   - 'dist/**'
 
 functions:
   hello:
-    handler: lambdas/search-api/handler.hello
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
+    handler: dist/handler.index
     events:
       - httpApi:
-          path: /hello
+          path: /classes
           method: get
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -116,10 +115,14 @@ functions:
 #       Value: "Some output value"
 
 plugins:
-  - serverless-python-requirements
+  - serverless-plugin-scripts
+  - serverless-layers
 
 custom:
-  pythonRequirements:
-    layer: true
-    noDeploy:
-      - pytest
+  scripts:
+    hooks:
+      'deploy:createDeploymentArtifacts': npm run build
+  serverless-layers:
+    layersDeploymentBucket: uf-scheduler-api-dev-serverlessdeploymentbucket-o2iji1gigl12
+    common:
+      dependenciesPath: ./package.json

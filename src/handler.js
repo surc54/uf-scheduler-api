@@ -7,9 +7,10 @@ export async function index (event) {
   const { semester, classNumber, courseCode } = event.queryStringParameters
 
   try {
-    const response = await axios.get(getQueryUrl({ semester, classNumber, courseCode }).toString())
-    response.status
-    return apiResponse(200, response)
+    const url = getQueryUrl({ semester, classNumber, courseCode }).toString()
+    const response = await axios.get(url)
+    console.log('Sending request to ', url)
+    return apiResponse(200, response.data)
   } catch (e) {
     if (e.response) {
       // request succeeded, but returned non-200
@@ -30,46 +31,12 @@ function getQueryUrl (options) {
     category: 'CWSP',
     'class-num': classNumber,
     'course-code': courseCode,
-    'course-title': '',
-    'cred-srch': '',
-    credits: '',
-    'day-f': '',
-    'day-m': '',
-    'day-r': '',
-    'day-s': '',
-    'day-t': '',
-    'day-w': '',
     days: false,
-    dept: '+',
-    eep: '',
     fitsSchedule: false,
-    ge: '',
-    'ge-b': '',
-    'ge-c': '',
-    'ge-d': '',
-    'ge-h': '',
-    'ge-m': '',
-    'ge-n': '',
-    'ge-p': '',
-    'ge-s': '',
     hons: false,
-    instructor: '',
     'last-control-number': 0,
-    'level-max': '--',
-    'level-min': '--',
     'no-open-seats': false,
-    'online-a': '',
-    'online-c': '',
-    'online-h': '',
-    'online-p': '',
-    'period-b': '',
-    'period-e': '',
-    'prog-level': '+',
     term: semester,
-    'wr-2000': '',
-    'wr-4000': '',
-    'wr-6000': '',
-    writing: ''
   }).toString()
 
   return url
